@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- =====================================================
+       TOP BAR: Greeting + Theme Toggle
+       ===================================================== -->
+  <header class="top-bar">
+
+    <div>
+      <div id="greeting-time" class="greeting-time">00:00:00</div>
+      <div id="greeting-date" class="greeting-date">—</div>
+      <div id="greeting-message" class="greeting-message">Selamat datang.</div>
+
+      <form id="name-form" class="greeting-name-form" aria-label="Set your name">
+        <input
+          type="text"
+          id="name-input"
+          placeholder="Your name"
+          maxlength="40"
+          aria-label="Enter your name"
+          style="max-width: 180px;"
+        />
+        <button type="submit" class="btn btn-secondary btn-sm">Set</button>
+      </form>
+    </div>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+      Dark mode
+    </button>
+
+  </header>
+
+  <!-- =====================================================
+       MAIN GRID: Timer (left) | Quick Links (right)
+       ===================================================== -->
+  <div class="grid">
+
+    <!-- ----- Focus Timer ----- -->
+    <section class="panel" aria-labelledby="timer-title">
+      <p id="timer-title" class="panel-title">Focus Timer</p>
+
+      <!-- Large countdown -->
+      <div id="timer-display" class="timer-display">25:00</div>
+
+      <!-- Thin progress bar -->
+      <div class="timer-progress-track" aria-hidden="true">
+        <div id="timer-progress-bar" class="timer-progress-bar"></div>
+      </div>
+
+      <div class="timer-controls">
+        <button id="btn-start" class="btn btn-primary">Start</button>
+        <button id="btn-stop"  class="btn btn-secondary" disabled>Stop</button>
+        <button id="btn-reset" class="btn btn-secondary">Reset</button>
+      </div>
+
+      <!-- Configurable Pomodoro duration -->
+      <div class="timer-settings">
+        <label for="timer-duration-input">Duration:</label>
+        <input
+          type="number"
+          id="timer-duration-input"
+          min="1"
+          max="120"
+          value="25"
+          aria-label="Timer duration in minutes"
+        />
+        <span>min</span>
+      </div>
+    </section>
+
+    <!-- ----- Quick Links ----- -->
+    <section class="panel" aria-labelledby="links-title">
+      <p id="links-title" class="panel-title">Quick Links</p>
+
+      <div id="links-container" class="links-grid"
+           role="list" aria-label="Saved quick links"></div>
+
+      <form id="link-form" class="link-add-form" aria-label="Add quick link">
+        <input
+          type="text"
+          id="link-label-input"
+          placeholder="Label (e.g. Gmail)"
+          maxlength="30"
+          aria-label="Link label"
+          required
+        />
+        <input
+          type="url"
+          id="link-url-input"
+          placeholder="URL (e.g. https://…)"
+          aria-label="Link URL"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+    </section>
+
+  </div><!-- /grid -->
+
+  <!-- =====================================================
+       BOTTOM: Tasks (full width)
+       ===================================================== -->
+  <div class="grid-bottom">
+
+    <section class="panel" aria-labelledby="todo-title">
+      <p id="todo-title" class="panel-title">Tasks</p>
+
+      <!-- Add task (Enter submits via form) -->
+      <form id="todo-form" class="todo-input-row" aria-label="Add task">
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="Add a task and press Enter…"
+          maxlength="200"
+          aria-label="New task text"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+
+      <!-- Toolbar: filters + counter + clear-done -->
+      <div class="todo-toolbar">
+
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button class="todo-filter-btn active" data-filter="all">All</button>
+          <button class="todo-filter-btn"        data-filter="active">Active</button>
+          <button class="todo-filter-btn"        data-filter="done">Done</button>
+        </div>
+
+        <div class="todo-meta">
+          <span id="todo-counter" class="todo-counter" aria-live="polite"></span>
+          <button id="btn-clear-done" class="btn btn-ghost btn-sm btn-danger">
+            Clear done
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Sort row -->
+      <div class="todo-sort-row">
+        <label for="todo-sort-select">Sort:</label>
+        <select id="todo-sort-select" aria-label="Sort tasks">
+          <option value="default">Default (added order)</option>
+          <option value="az">A → Z</option>
+          <option value="status">Active first</option>
+        </select>
+      </div>
+
+      <!-- Task list -->
+      <ul id="todo-list" class="todo-list"
+          aria-label="Task list" aria-live="polite">
+        <!-- Populated by JS -->
+      </ul>
+    </section>
+
+  </div><!-- /grid-bottom -->
+
+</div><!-- /app-wrapper -->
+
+<script src="js/script.js"></script>
+</body>
+</html>
